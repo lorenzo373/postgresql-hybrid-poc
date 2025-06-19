@@ -25,10 +25,7 @@ export class DossierKV {
     @ViewColumn({ name: "project_number" })
     projectNumber: number;
 
-    @ViewColumn({ name: "rds_coordinates", transformer: {
-        to: (value: any) => JSON.stringify(value),
-        from: (value: any) => JSON.parse(value),
-    } })
+    @ViewColumn({ name: "rds_coordinates" })
     rdsCoordinates: {
         x: number;
         y: number;

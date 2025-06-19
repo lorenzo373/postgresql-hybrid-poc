@@ -22,14 +22,25 @@ export class Init1750253020290 implements MigrationInterface {
     // Create dossiers_gvrn view
     await queryRunner.query(`
       CREATE VIEW dossiers_gvrn AS
-      SELECT *, data->>'name' as name, data->>'description' as description, data->>'execution_date' as execution_date, data->>'status_code' as status_code, data->>'status_description' as status_description
+      SELECT
+        *,
+        data->>'name' as name,
+        data->>'description' as description,
+        (data->>'execution_date')::date as execution_date,
+        (data->>'status_code')::integer as status_code,
+        data->>'status_description' as status_description
       FROM dossiers WHERE chain_type = 'gvrn'
     `);
 
     // Create dossiers_kv view
     await queryRunner.query(`
       CREATE VIEW dossiers_kv AS
-      SELECT *, data->>'team' as team, data->>'project_number' as project_number, data->>'rds_coordinates' as rds_coordinates, data->>'expected_start_date' as expected_start_date
+      SELECT
+        *,
+        data->>'team' as team,
+        (data->>'project_number')::integer as project_number,
+        data->'rds_coordinates' as rds_coordinates,
+        (data->>'expected_start_date')::date as expected_start_date
       FROM dossiers WHERE chain_type = 'kv'
     `);
 
