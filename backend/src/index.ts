@@ -13,8 +13,8 @@ import seedInitial from "./seeders/seed-initial";
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost", // Run locally
-  // host: "postgres", // Run in docker
+  // host: "localhost", // Run locally
+  host: "postgres", // Run in docker
   port: 5432,
   username: "postgres",
   password: "postgres",
